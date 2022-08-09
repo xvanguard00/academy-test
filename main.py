@@ -17,6 +17,7 @@ data = r.json()
 
 jsondata = pd.json_normalize(data, sep=' , ',max_level=3)
 datafromsite = pd.DataFrame(jsondata)
+#print(datafromsite.to_string())
 
 user = 'root'
 hostip = '34.163.182.248'
@@ -31,31 +32,24 @@ nba_savings = pd.read_sql_query('''SELECT * FROM nba_savings''',con = engine)
 nba_players = pd.read_sql_query('''SELECT * FROM nba_players''',con = engine)
 df = nba_players
 
-df = df.join(nba_salary['Salary'], on='id')
-df = df.join(nba_savings['Savings'], on='id')
+df = df.join(nba_salary['Salary'], on='index')
+df = df.join(nba_savings['Savings'], on='index')
 """Push into fabian_players table at database academy"""
 #df.to_sql('fabian_players', con=engine, if_exists= 'replace')
 
 
 """SUBJECT 4"""
 
-df = df.fillna(999)
+df = df.fillna(0)
 
 """Exercise 4.1"""
 frameone = df.groupby('team.city')['Salary'].mean().reset_index()
 frameoneone = df.groupby('team.city')['index'].count().reset_index()
 
 """Exercise 4.2"""
-
 frame_exercise_two = df
 frame_exercise_two['full_name']= df['first_name'].astype(str) + " " + df['last_name'] #Get Full Name
 frame_exercise_two = frame_exercise_two['full_name']
-
-avgsalary = df['Salary'].mean()
-
-
-frame_exercise_two['avg_salary'] = df['Salary']
-
 print(frame_exercise_two.head().to_string())
 
 """Exercise 4.3"""
