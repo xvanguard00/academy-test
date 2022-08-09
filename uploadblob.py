@@ -13,7 +13,7 @@ salariesandsavings.to_csv('salariesandsavings_radomirfabian.csv',sep=',',index=F
 # Get the connection string from Shared Access Signature
 connect_str = "BlobEndpoint=https://bdacademy.blob.core.windows.net/?sv=2021-06-08&ss=bfqt&srt=sco&sp=rwdlacupiytfx&se=2022-08-31T15:33:52Z&st=2022-08-09T07:33:52Z&spr=https&sig=66NHfW%2FPPySH9IfpsX0pMj%2Fymjdh2xJVPFf3o9Rw4vA%3D"
 container_name = "ready"
-local_file_name = "salariesandsavings.csv"
+local_file_name = "salariesandsavings_radomirfabian.csv"
 
 blob_service_client = BlobServiceClient.from_connection_string(connect_str)
 
