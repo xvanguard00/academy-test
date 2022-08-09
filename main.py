@@ -1,5 +1,6 @@
 import re
 
+import numpy as np
 import requests
 import pandas as pd
 import json
@@ -16,8 +17,7 @@ r = requests.get(url = URL, params = PARAMS) #create http request, needs request
 data = r.json()
 
 jsondata = pd.json_normalize(data, sep=' , ',max_level=3)
-datafromsite = pd.DataFrame(jsondata)
-#print(datafromsite.to_string())
+#datafromsite = pd.DataFrame(jsondata)
 
 user = 'root'
 hostip = '34.163.182.248'
@@ -40,16 +40,19 @@ df = df.join(nba_savings['Savings'], on='index')
 
 """SUBJECT 4"""
 
-df = df.fillna(0)
+df = df.fillna(999)
 
 """Exercise 4.1"""
 frameone = df.groupby('team.city')['Salary'].mean().reset_index()
 frameoneone = df.groupby('team.city')['index'].count().reset_index()
 
 """Exercise 4.2"""
-frame_exercise_two = df
+
+frame_exercise_two = pd.DataFrame(columns=[['full_name','above_avg_salary']])
 frame_exercise_two['full_name']= df['first_name'].astype(str) + " " + df['last_name'] #Get Full Name
-frame_exercise_two = frame_exercise_two['full_name']
+avgsal = df['Salary'].mean()
+frame_exercise_two['above_avg_salary'] = np.where(df['Salary'] > avgsal, 1, 0)
+
 print(frame_exercise_two.head().to_string())
 
 """Exercise 4.3"""
@@ -67,14 +70,6 @@ T4:
 city as primary id: alter table add primary key (city)
 average_salary in the city: groupby(city) mean(salary)
 number_of_players in the city: groupby(city) count(players)
-
-2.
-full_name of player: make dataframe with first and last name into one column
-above_average_salary: query salary > mean(salary)
-
-3.
-group by city(LA) , sort by axis=1 (columns)
-
 
 """
 
