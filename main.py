@@ -51,7 +51,7 @@ frameoneone = df.groupby('team.city')['index'].count().reset_index()
 frame_exercise_two = pd.DataFrame(columns=[['full_name','above_avg_salary']])
 frame_exercise_two['full_name']= df['first_name'].astype(str) + " " + df['last_name'] #Get Full Name
 avgsal = df['Salary'].mean()
-frame_exercise_two['above_avg_salary'] = np.where(df['Salary'] > avgsal, '1', '0')
+frame_exercise_two['above_avg_salary'] = np.where(df['Salary'] > avgsal, '1', '0')[0]
 
 print(frame_exercise_two.head().to_string())
 
