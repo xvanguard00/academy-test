@@ -32,6 +32,8 @@ df = df.join(nba_savings['Savings'], on='id')
 """Push into fabian_players table at database academy"""
 df.to_sql('fabian_players', con=engine, if_exists= 'replace')
 
+print(df.head().to_string())
+
 
 
 
