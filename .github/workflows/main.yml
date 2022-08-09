@@ -22,9 +22,5 @@ jobs:
         if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
     - name: Execute
       run: |
-        python downloadblob.py
-        echo Executing downloadblob.py
-        python uploadblob.py
-        echo Executing uploadblob.py
         python main.py
         echo Executing main.py
