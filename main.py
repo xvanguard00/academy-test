@@ -53,6 +53,11 @@ frame_exercise_two['full_name']= df['first_name'].astype(str) + " " + df['last_n
 avgsal = df['Salary'].mean()
 frame_exercise_two['above_avg_salary'] = np.where(df['Salary'] > avgsal, 1, 0)
 
+try:
+    frame_exercise_two['above_avg_salary'] = np.where(df['Salary'] > avgsal, 1, 0)
+except TypeError:
+    pass
+
 print(frame_exercise_two.head().to_string())
 
 """Exercise 4.3"""
